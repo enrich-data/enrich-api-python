@@ -1,4 +1,4 @@
-# graphmob-api-go
+# graphmob-api-python
 
 Graphmob API Python.
 
