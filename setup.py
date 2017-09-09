@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 
 setup(
-    name='graphmob-api-python',
+    name='graphmob-api',
     version='1.0.0',
     author=u'Valerian Saliou',
     author_email='valerian@valeriansaliou.name',
