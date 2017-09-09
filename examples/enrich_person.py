@@ -5,7 +5,8 @@
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-from graphmob_api import Graphmob
+# from graphmob_api import Graphmob
+from graphmob.graphmob import Graphmob
 
 client = Graphmob()
 
