@@ -5,9 +5,11 @@
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-from resources.enrich import GraphmobEnrich
-from resources.search import GraphmobSearch
-from resources.verify import GraphmobVerify
+from restclient import Resource
+
+from .resources.enrich import GraphmobEnrich
+from .resources.search import GraphmobSearch
+from .resources.verify import GraphmobVerify
 
 class Graphmob(object):
   def __init__(self):
@@ -42,6 +44,11 @@ class Graphmob(object):
   def __do_get(self, resource, query, retry_count, hold_for_seconds):
     # TODO
     print("...TODO...")
+
+    # TODO: base request
+    # TODO: timeout
+    # TODO: user agent
+    # TODO: retry
 
   def __prepare_rest_url(self, resource):
     return "%s%s%s" % (self.__rest_host, self.__rest_base_path, resource)
