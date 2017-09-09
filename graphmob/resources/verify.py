@@ -9,8 +9,8 @@ class GraphmobVerify(object):
   def __init__(self, parent):
     self.parent = parent
 
-  def validate_email(query):
-    return self.get("/verify/validate/email", query)
+  def validate_email(self, query):
+    return self.parent.get("/verify/validate/email", query)
 
-  def format_email(query):
-    return self.get("/verify/format/email", query)
+  def format_email(self, query):
+    return self.parent.get("/verify/format/email", query)

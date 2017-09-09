@@ -5,15 +5,26 @@
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-from restclient import Resource
+import json
+from time import sleep
+from urllib import request, parse, error
+from base64 import b64encode as b64
 
 from .resources.enrich import GraphmobEnrich
 from .resources.search import GraphmobSearch
 from .resources.verify import GraphmobVerify
 
 class Graphmob(object):
+  CREATED_STATUS_CODE = 201
+  NOT_FOUND_STATUS_CODE = 404
+  CREATED_RETRY_COUNT_MAX = 2
+
   def __init__(self):
     self.__auth = {}
+
+    self.__rest_host = None
+    self.__rest_base_path = None
+    self.__timeout = None
 
     self.enrich = GraphmobEnrich(self)
     self.search = GraphmobSearch(self)
@@ -24,10 +35,13 @@ class Graphmob(object):
     self.__auth["secret_key"] = secret_key
 
   def get_rest_host(self):
-    self.__rest_host or "https://api.graphmob.com"
+    return self.__rest_host or "https://api.graphmob.com"
 
   def get_rest_base_path(self):
-    self.__rest_base_path or "/v1"
+    return self.__rest_base_path or "/v1"
+
+  def get_timeout(self):
+    return self.__timeout or 5
 
   def set_rest_host(self, rest_host):
     self.__rest_host = rest_host
@@ -35,20 +49,60 @@ class Graphmob(object):
   def set_rest_base_path(self, rest_base_path):
     self.__rest_base_path = rest_base_path
 
-  def set_timeout(self):
-    self.timeout or 5
+  def set_timeout(self, timeout):
+    self.__timeout = timeout
 
   def get(self, resource, query):
-    self.__do_get(resource, query, 0, 0)
+    return self.__do_get(resource, query, 0, 0)
 
   def __do_get(self, resource, query, retry_count, hold_for_seconds):
-    # TODO
-    print("...TODO...")
+    url = "%s?%s" % (self.__prepare_rest_url(resource), parse.urlencode(query))
 
-    # TODO: base request
-    # TODO: timeout
-    # TODO: user agent
-    # TODO: retry
+    # Abort?
+    if retry_count > self.CREATED_RETRY_COUNT_MAX:
+      raise error.HTTPError(url, 404, "Not Found", None, None)
+    else:
+      # Hold.
+      sleep(hold_for_seconds)
+
+      headers = {
+        "User-Agent": "graphmob-api-python/1.0.0",
+        "Authorization": self.__generate_auth()
+      }
+
+      req = request.Request(url, None, headers)
+
+      try:
+        with request.urlopen(req, None, self.get_timeout()) as response:
+          data = response.read()
+          status = response.code
+          raised_error = None
+      except error.HTTPError as e:
+        status = e.code
+        response = None
+        raised_error = e
+
+      # Re-schedule request? (created)
+      if status == self.CREATED_STATUS_CODE or (retry_count > 0 and
+          status == self.NOT_FOUND_STATUS_CODE):
+        if response and response.headers["Retry-After"]:
+          hold_for_seconds = int(response.headers["Retry-After"])
+
+        return self.__do_get(
+          resource, query, retry_count + 1, hold_for_seconds
+        )
+
+      # Raise intercepted error?
+      if raised_error:
+        raise raised_error
+
+      return json.loads(data) if data else None
+
+  def __generate_auth(self):
+    raw = "%s:%s" % (self.__auth["user_id"], self.__auth["secret_key"])
+    key = b64(raw.encode("ascii"))
+
+    return "Basic %s" % key.decode("ascii")
 
   def __prepare_rest_url(self, resource):
-    return "%s%s%s" % (self.__rest_host, self.__rest_base_path, resource)
+    return self.get_rest_host() + self.get_rest_base_path() + resource
