@@ -64,6 +64,17 @@ This library implements all methods the Graphmob API provides. See the [API docs
 
 ### Search API
 
+#### Lookup People
+
+* **Method:** `client.search.lookup_people(query, page_number)`
+* **Docs:** [https://docs.graphmob.com/api/v1/#lookup-people](https://docs.graphmob.com/api/v1/#lookup-people)
+
+```python
+data = client.search.lookup_people({
+  "company_name": "Crisp"
+}, 1)
+```
+
 #### Lookup Companies
 
 * **Method:** `client.search.lookup_companies(query, page_number)`

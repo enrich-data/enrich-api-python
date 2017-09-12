@@ -66,7 +66,7 @@ class Graphmob(object):
       sleep(hold_for_seconds)
 
       headers = {
-        "User-Agent": "graphmob-api-python/1.0.0",
+        "User-Agent": "graphmob-api-python/1.0.1",
         "Authorization": self.__generate_auth()
       }
 
