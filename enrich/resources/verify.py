@@ -5,7 +5,7 @@
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-class EnrichVerify(object):
+class VerifyResource(object):
   def __init__(self, parent):
     self.parent = parent
 

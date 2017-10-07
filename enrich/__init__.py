@@ -10,9 +10,9 @@ from time import sleep
 from urllib import request, parse, error
 from base64 import b64encode as b64
 
-from .resources.enrich import EnrichEnrich
-from .resources.search import EnrichSearch
-from .resources.verify import EnrichVerify
+from .resources.enrich import EnrichResource
+from .resources.search import SearchResource
+from .resources.verify import VerifyResource
 
 class Enrich(object):
   CREATED_STATUS_CODE = 201
@@ -26,9 +26,9 @@ class Enrich(object):
     self.__rest_base_path = None
     self.__timeout = None
 
-    self.enrich = EnrichEnrich(self)
-    self.search = EnrichSearch(self)
-    self.verify = EnrichVerify(self)
+    self.enrich = EnrichResource(self)
+    self.search = SearchResource(self)
+    self.verify = VerifyResource(self)
 
   def authenticate(self, user_id, secret_key):
     self.__auth["user_id"] = user_id
@@ -66,7 +66,7 @@ class Enrich(object):
       sleep(hold_for_seconds)
 
       headers = {
-        "User-Agent": "enrich-api-python/1.1.0",
+        "User-Agent": "enrich-api-python/1.1.1",
         "Authorization": self.__generate_auth()
       }
 

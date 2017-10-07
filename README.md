@@ -150,11 +150,11 @@ data = client.enrich.person({
 
 #### Enrich a Company
 
-* **Method:** `client.enrichdata.company(query)`
+* **Method:** `client.enrich.company(query)`
 * **Docs:** [https://docs.enrichdata.com/api/v1/#enrich-a-company](https://docs.enrichdata.com/api/v1/#enrich-a-company)
 
 ```python
-data = client.enrichdata.company({
+data = client.enrich.company({
   "legal_name": "Crisp IM, Inc."
 })
 ```

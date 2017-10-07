@@ -5,7 +5,7 @@
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-class EnrichSearch(object):
+class SearchResource(object):
   def __init__(self, parent):
     self.parent = parent
 

@@ -5,7 +5,7 @@
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-class EnrichEnrich(object):
+class EnrichResource(object):
   def __init__(self, parent):
     self.parent = parent
 

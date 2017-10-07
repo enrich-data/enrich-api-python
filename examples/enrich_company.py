@@ -14,7 +14,7 @@ client.authenticate(
   "sk_f293d44f-675d-4cb1-9c78-52b8a9af0df2"
 )
 
-data = client.enrichdata.company({
+data = client.enrich.company({
   "legal_name": "Crisp IM, Inc."
 })
 
