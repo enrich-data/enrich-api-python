@@ -1,13 +1,13 @@
 ##
-# graphmob-api-python
+# enrich-api-python
 #
 # Copyright 2017, Valerian Saliou
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-from graphmob_api import Graphmob
+from enrich_api import Enrich
 
-client = Graphmob()
+client = Enrich()
 
 client.authenticate(
   "ui_a311da78-6b89-459c-8028-b331efab20d5",

@@ -4,15 +4,15 @@ from setuptools import find_packages
 
 
 setup(
-    name='graphmob-api',
-    version='1.0.1',
+    name='enrich-api',
+    version='1.1.0',
     author=u'Valerian Saliou',
     author_email='valerian@valeriansaliou.name',
     packages=find_packages(),
     include_package_data=True,
-    url='https://gitlab.com/graphmob-com/graphmob-api-python',
+    url='https://gitlab.com/enrich-data/enrich-api-python',
     license='MIT - http://opensource.org/licenses/mit-license.php',
-    description='Graphmob API Python.',
+    description='Enrich API Python.',
     long_description=open('README.md').read(),
     classifiers=[
         'Environment :: Web Environment',

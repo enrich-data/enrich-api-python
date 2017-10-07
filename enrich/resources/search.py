@@ -1,11 +1,11 @@
 ##
-# graphmob-api-python
+# enrich-api-python
 #
 # Copyright 2017, Valerian Saliou
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
 ##
 
-class GraphmobSearch(object):
+class EnrichSearch(object):
   def __init__(self, parent):
     self.parent = parent
 

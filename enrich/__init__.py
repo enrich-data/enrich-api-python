@@ -1,5 +1,5 @@
 ##
-# graphmob-api-python
+# enrich-api-python
 #
 # Copyright 2017, Valerian Saliou
 # Author: Valerian Saliou <valerian@valeriansaliou.name>
@@ -10,11 +10,11 @@ from time import sleep
 from urllib import request, parse, error
 from base64 import b64encode as b64
 
-from .resources.enrich import GraphmobEnrich
-from .resources.search import GraphmobSearch
-from .resources.verify import GraphmobVerify
+from .resources.enrich import EnrichEnrich
+from .resources.search import EnrichSearch
+from .resources.verify import EnrichVerify
 
-class Graphmob(object):
+class Enrich(object):
   CREATED_STATUS_CODE = 201
   NOT_FOUND_STATUS_CODE = 404
   CREATED_RETRY_COUNT_MAX = 2
@@ -26,16 +26,16 @@ class Graphmob(object):
     self.__rest_base_path = None
     self.__timeout = None
 
-    self.enrich = GraphmobEnrich(self)
-    self.search = GraphmobSearch(self)
-    self.verify = GraphmobVerify(self)
+    self.enrich = EnrichEnrich(self)
+    self.search = EnrichSearch(self)
+    self.verify = EnrichVerify(self)
 
   def authenticate(self, user_id, secret_key):
     self.__auth["user_id"] = user_id
     self.__auth["secret_key"] = secret_key
 
   def get_rest_host(self):
-    return self.__rest_host or "https://api.graphmob.com"
+    return self.__rest_host or "https://api.enrichdata.com"
 
   def get_rest_base_path(self):
     return self.__rest_base_path or "/v1"
@@ -66,7 +66,7 @@ class Graphmob(object):
       sleep(hold_for_seconds)
 
       headers = {
-        "User-Agent": "graphmob-api-python/1.0.1",
+        "User-Agent": "enrich-api-python/1.1.0",
         "Authorization": self.__generate_auth()
       }
 
