@@ -10,7 +10,7 @@ setup(
     author_email='valerian@valeriansaliou.name',
     packages=find_packages(),
     include_package_data=True,
-    url='https://gitlab.com/enrich-data/enrich-api-python',
+    url='https://github.com/enrich-data/enrich-api-python',
     license='MIT - http://opensource.org/licenses/mit-license.php',
     description='Enrich API Python.',
     long_description=open('README.md').read(),
