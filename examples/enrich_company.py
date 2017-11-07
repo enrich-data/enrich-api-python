@@ -15,7 +15,7 @@ client.authenticate(
 )
 
 data = client.enrich.company({
-  "legal_name": "Crisp IM, Inc."
+  "legal_name": "Crisp IM SARL"
 })
 
 print(data)

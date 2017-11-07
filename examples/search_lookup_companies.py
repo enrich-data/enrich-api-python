@@ -15,7 +15,7 @@ client.authenticate(
 )
 
 data = client.search.lookup_companies({
-  "legal_name": "Crisp IM, Inc.",
+  "legal_name": "Crisp IM SARL",
   "founded": 2015
 }, 1)
 

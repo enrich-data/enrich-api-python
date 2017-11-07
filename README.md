@@ -82,7 +82,7 @@ data = client.search.lookup_people({
 
 ```python
 data = client.search.lookup_companies({
-  "legal_name": "Crisp IM, Inc.",
+  "legal_name": "Crisp IM SARL",
   "founded": 2015
 }, 1)
 ```
@@ -155,7 +155,7 @@ data = client.enrich.person({
 
 ```python
 data = client.enrich.company({
-  "legal_name": "Crisp IM, Inc."
+  "legal_name": "Crisp IM SARL"
 })
 ```
 
