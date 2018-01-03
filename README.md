@@ -9,7 +9,7 @@ Copyright 2017 Enrich. See LICENSE for copying information.
 
 ## Usage
 
-Add the library to your `Gemfile`:
+Install the library:
 
 ```bash
 pip install enrich-api
