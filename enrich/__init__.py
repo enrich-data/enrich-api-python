@@ -66,7 +66,7 @@ class Enrich(object):
       sleep(hold_for_seconds)
 
       headers = {
-        "User-Agent": "enrich-api-python/1.1.3",
+        "User-Agent": "enrich-api-python/1.1.4",
         "Authorization": self.__generate_auth()
       }
 
