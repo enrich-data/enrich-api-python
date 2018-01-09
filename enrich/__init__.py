@@ -66,7 +66,7 @@ class Enrich(object):
       sleep(hold_for_seconds)
 
       headers = {
-        "User-Agent": "enrich-api-python/1.1.2",
+        "User-Agent": "enrich-api-python/1.1.3",
         "Authorization": self.__generate_auth()
       }
 
@@ -78,9 +78,12 @@ class Enrich(object):
           status = response.code
           raised_error = None
       except error.HTTPError as e:
+        data = None
         status = e.code
         response = None
-        raised_error = e
+
+        # Consider 'Not Found' as a 'normal' error
+        raised_error = None if status == self.NOT_FOUND_STATUS_CODE else e
 
       # Re-schedule request? (created)
       if status == self.CREATED_STATUS_CODE or (retry_count > 0 and
