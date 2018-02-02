@@ -11,7 +11,6 @@ from urllib import request, parse, error
 from base64 import b64encode as b64
 
 from .resources.enrich import EnrichResource
-from .resources.search import SearchResource
 from .resources.verify import VerifyResource
 
 class Enrich(object):
@@ -27,7 +26,6 @@ class Enrich(object):
     self.__timeout = None
 
     self.enrich = EnrichResource(self)
-    self.search = SearchResource(self)
     self.verify = VerifyResource(self)
 
   def authenticate(self, user_id, secret_key):
@@ -66,7 +64,7 @@ class Enrich(object):
       sleep(hold_for_seconds)
 
       headers = {
-        "User-Agent": "enrich-api-python/1.1.4",
+        "User-Agent": "enrich-api-python/1.1.6",
         "Authorization": self.__generate_auth()
       }
 

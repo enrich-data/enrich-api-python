@@ -62,53 +62,6 @@ If a requested data point is already known by the Enrich API, it will be immedia
 
 This library implements all methods the Enrich API provides. See the [API docs](https://docs.enrichdata.com/api/v1/) for a reference of available methods, as well as how returned data is formatted.
 
-### Search API
-
-#### Lookup People
-
-* **Method:** `client.search.lookup_people(query, page_number)`
-* **Docs:** [https://docs.enrichdata.com/api/v1/#lookup-people](https://docs.enrichdata.com/api/v1/#lookup-people)
-
-```python
-data = client.search.lookup_people({
-  "company_name": "Crisp"
-}, 1)
-```
-
-#### Lookup Companies
-
-* **Method:** `client.search.lookup_companies(query, page_number)`
-* **Docs:** [https://docs.enrichdata.com/api/v1/#lookup-companies](https://docs.enrichdata.com/api/v1/#lookup-companies)
-
-```python
-data = client.search.lookup_companies({
-  "legal_name": "Crisp IM SARL",
-  "founded": 2015
-}, 1)
-```
-
-#### Lookup Emails
-
-* **Method:** `client.search.lookup_emails(query, page_number)`
-* **Docs:** [https://docs.enrichdata.com/api/v1/#lookup-emails](https://docs.enrichdata.com/api/v1/#lookup-emails)
-
-```python
-data = client.search.lookup_emails({
-  "email_domain": "crisp.chat"
-}, 1)
-```
-
-#### Suggest Companies
-
-* **Method:** `client.search.suggest_companies(query, page_number)`
-* **Docs:** [https://docs.enrichdata.com/api/v1/#suggest-companies](https://docs.enrichdata.com/api/v1/#suggest-companies)
-
-```python
-data = client.search.suggest_companies({
-  "company_name": "Crisp"
-}, 1)
-```
-
 ### Verify API
 
 #### Validate an Email
@@ -122,19 +75,6 @@ data = client.verify.validate_email({
 })
 ```
 
-#### Format an Email
-
-* **Method:** `client.verify.format_email(query)`
-* **Docs:** [https://docs.enrichdata.com/api/v1/#format-an-email](https://docs.enrichdata.com/api/v1/#format-an-email)
-
-```python
-data = client.verify.format_email({
-  "email_domain": "crisp.chat",
-  "first_name": "Valerian",
-  "last_name": "Saliou"
-})
-```
-
 ### Enrich API
 
 #### Enrich a Person
@@ -145,17 +85,6 @@ data = client.verify.format_email({
 ```python
 data = client.enrich.person({
   "email": "valerian@crisp.chat"
-})
-```
-
-#### Enrich a Company
-
-* **Method:** `client.enrich.company(query)`
-* **Docs:** [https://docs.enrichdata.com/api/v1/#enrich-a-company](https://docs.enrichdata.com/api/v1/#enrich-a-company)
-
-```python
-data = client.enrich.company({
-  "name": "Crisp IM"
 })
 ```
 

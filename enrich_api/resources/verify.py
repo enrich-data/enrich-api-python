@@ -11,6 +11,3 @@ class VerifyResource(object):
 
   def validate_email(self, query):
     return self.parent.get("/verify/validate/email", query)
-
-  def format_email(self, query):
-    return self.parent.get("/verify/format/email", query)
