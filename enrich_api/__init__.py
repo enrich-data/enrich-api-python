@@ -16,7 +16,7 @@ from .resources.verify import VerifyResource
 class Enrich(object):
   CREATED_STATUS_CODE = 201
   NOT_FOUND_STATUS_CODE = 404
-  CREATED_RETRY_COUNT_MAX = 2
+  CREATED_RETRY_COUNT_MAX = 10
 
   def __init__(self):
     self.__auth = {}
