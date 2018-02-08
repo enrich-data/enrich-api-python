@@ -88,6 +88,17 @@ data = client.enrich.person({
 })
 ```
 
+#### Enrich a Company
+
+* **Method:** `client.enrich.company(query)`
+* **Docs:** [https://docs.enrichdata.com/api/v1/#enrich-a-company](https://docs.enrichdata.com/api/v1/#enrich-a-company)
+
+```python
+data = client.enrich.company({
+  "name": "Crisp IM"
+})
+```
+
 #### Enrich a Network
 
 * **Method:** `client.enrich.network(query)`

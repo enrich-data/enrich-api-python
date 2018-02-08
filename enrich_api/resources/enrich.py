@@ -12,5 +12,8 @@ class EnrichResource(object):
   def person(self, query):
     return self.parent.get("/enrich/person", query)
 
+  def company(self, query):
+    return self.parent.get("/enrich/company", query)
+
   def network(self, query):
     return self.parent.get("/enrich/network", query)
