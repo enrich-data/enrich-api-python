@@ -5,7 +5,7 @@ from setuptools import find_packages
 
 setup(
     name='enrich-api',
-    version='1.1.7',
+    version='1.2.0',
     author=u'Valerian Saliou',
     author_email='valerian@valeriansaliou.name',
     packages=find_packages(),

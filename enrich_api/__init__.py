@@ -6,7 +6,6 @@
 ##
 
 import json
-from time import sleep
 from urllib import request, parse, error
 from base64 import b64encode as b64
 
@@ -14,9 +13,7 @@ from .resources.enrich import EnrichResource
 from .resources.verify import VerifyResource
 
 class Enrich(object):
-  CREATED_STATUS_CODE = 201
   NOT_FOUND_STATUS_CODE = 404
-  CREATED_RETRY_COUNT_MAX = 10
 
   def __init__(self):
     self.__auth = {}
@@ -39,7 +36,7 @@ class Enrich(object):
     return self.__rest_base_path or "/v1"
 
   def get_timeout(self):
-    return self.__timeout or 5
+    return self.__timeout or 40
 
   def set_rest_host(self, rest_host):
     self.__rest_host = rest_host
@@ -51,53 +48,36 @@ class Enrich(object):
     self.__timeout = timeout
 
   def get(self, resource, query):
-    return self.__do_get(resource, query, 0, 0)
+    return self.__do_get(resource, query)
 
-  def __do_get(self, resource, query, retry_count, hold_for_seconds):
+  def __do_get(self, resource, query):
     url = "%s?%s" % (self.__prepare_rest_url(resource), parse.urlencode(query))
 
-    # Abort?
-    if retry_count > self.CREATED_RETRY_COUNT_MAX:
-      raise error.HTTPError(url, 404, "Not Found", None, None)
-    else:
-      # Hold.
-      sleep(hold_for_seconds)
+    headers = {
+      "User-Agent": "enrich-api-python/1.2.0",
+      "Authorization": self.__generate_auth()
+    }
 
-      headers = {
-        "User-Agent": "enrich-api-python/1.1.7",
-        "Authorization": self.__generate_auth()
-      }
+    req = request.Request(url, None, headers)
 
-      req = request.Request(url, None, headers)
+    try:
+      with request.urlopen(req, None, self.get_timeout()) as response:
+        data = response.read()
+        status = response.code
+        raised_error = None
+    except error.HTTPError as e:
+      data = None
+      status = e.code
+      response = None
 
-      try:
-        with request.urlopen(req, None, self.get_timeout()) as response:
-          data = response.read()
-          status = response.code
-          raised_error = None
-      except error.HTTPError as e:
-        data = None
-        status = e.code
-        response = None
+      # Consider 'Not Found' as a 'normal' error
+      raised_error = None if status == self.NOT_FOUND_STATUS_CODE else e
 
-        # Consider 'Not Found' as a 'normal' error
-        raised_error = None if status == self.NOT_FOUND_STATUS_CODE else e
+    # Raise intercepted error?
+    if raised_error:
+      raise raised_error
 
-      # Re-schedule request? (created)
-      if status == self.CREATED_STATUS_CODE or (retry_count > 0 and
-          status == self.NOT_FOUND_STATUS_CODE):
-        if response and response.headers["Retry-After"]:
-          hold_for_seconds = int(response.headers["Retry-After"])
-
-        return self.__do_get(
-          resource, query, retry_count + 1, hold_for_seconds
-        )
-
-      # Raise intercepted error?
-      if raised_error:
-        raise raised_error
-
-      return json.loads(data) if data else None
+    return json.loads(data) if data else None
 
   def __generate_auth(self):
     raw = "%s:%s" % (self.__auth["user_id"], self.__auth["secret_key"])
