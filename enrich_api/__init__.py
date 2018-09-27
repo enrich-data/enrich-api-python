@@ -30,7 +30,7 @@ class Enrich(object):
     self.__auth["secret_key"] = secret_key
 
   def get_rest_host(self):
-    return self.__rest_host or "https://api.enrichdata.com"
+    return self.__rest_host or "https://api.enrich.email"
 
   def get_rest_base_path(self):
     return self.__rest_base_path or "/v1"
@@ -54,7 +54,7 @@ class Enrich(object):
     url = "%s?%s" % (self.__prepare_rest_url(resource), parse.urlencode(query))
 
     headers = {
-      "User-Agent": "enrich-api-python/1.2.0",
+      "User-Agent": "enrich-api-python/2.0.0",
       "Authorization": self.__generate_auth()
     }
 
