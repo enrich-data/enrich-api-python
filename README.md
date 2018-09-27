@@ -21,7 +21,7 @@ Then, import it:
 from enrich_api import Enrich
 ```
 
-Construct a new authenticated Enrich client with your `user_id` and `secret_key` tokens (you can generate those from your Enrich Dashboard, [see the docs](https://docs.enrich.email/api/v1/)).
+Construct a new authenticated Enrich client with your `user_id` and `secret_key` tokens.
 
 ```python
 client = Enrich()
@@ -39,7 +39,7 @@ data = client.enrich.person({
 
 ## Authentication
 
-To authenticate against the API, generate your tokens (`user_id` and `secret_key`) **once** from your [Enrich Dashboard](https://dashboard.enrich.email/).
+To authenticate against the API, get your tokens (`user_id` and `secret_key`).
 
 Then, pass those tokens **once** when you instanciate the Enrich client as following:
 
