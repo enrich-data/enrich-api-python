@@ -4,7 +4,6 @@ The Enrich API Python wrapper. Enrich, Search and Verify data from your Python s
 
 Copyright 2017 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [Enrich REST API ~ v1](https://docs.enrich.email/api/v1/) at reference revision: 07/24/2017
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -60,14 +59,13 @@ If a requested data point is already known by the Enrich API, it will be immedia
 
 ## Resource Methods
 
-This library implements all methods the Enrich API provides. See the [API docs](https://docs.enrich.email/api/v1/) for a reference of available methods, as well as how returned data is formatted.
+This library implements all methods the Enrich API provides.
 
 ### Verify API
 
 #### Validate an Email
 
 * **Method:** `client.verify.validate_email(query)`
-* **Docs:** [https://docs.enrich.email/api/v1/#validate-an-email](https://docs.enrich.email/api/v1/#validate-an-email)
 
 ```python
 data = client.verify.validate_email({
@@ -80,7 +78,6 @@ data = client.verify.validate_email({
 #### Enrich a Person
 
 * **Method:** `client.enrich.person(query)`
-* **Docs:** [https://docs.enrich.email/api/v1/#enrich-a-person](https://docs.enrich.email/api/v1/#enrich-a-person)
 
 ```python
 data = client.enrich.person({
@@ -91,7 +88,6 @@ data = client.enrich.person({
 #### Enrich a Company
 
 * **Method:** `client.enrich.company(query)`
-* **Docs:** [https://docs.enrich.email/api/v1/#enrich-a-company](https://docs.enrich.email/api/v1/#enrich-a-company)
 
 ```python
 data = client.enrich.company({
@@ -102,7 +98,6 @@ data = client.enrich.company({
 #### Enrich a Network
 
 * **Method:** `client.enrich.network(query)`
-* **Docs:** [https://docs.enrich.email/api/v1/#enrich-a-network](https://docs.enrich.email/api/v1/#enrich-a-network)
 
 ```python
 data = client.enrich.network({
